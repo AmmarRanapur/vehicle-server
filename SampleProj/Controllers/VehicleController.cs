@@ -86,7 +86,7 @@ namespace SampleProj.Controllers
 
                 if (rowsAffected > 0)
                 {
-                    return Ok($"Vehicle with ID {id} deleted successfully.");
+                    return Ok($"Vehicle with ID {id} updated successfully.");
                 }
                 else
                 {
