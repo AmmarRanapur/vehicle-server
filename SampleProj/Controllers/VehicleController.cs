@@ -14,12 +14,11 @@ namespace SampleProj.Controllers
     public class VehicleController : ControllerBase
     {   
 
-        private string connectionString = @"Server=(localdb)\VehicleDB;Database=Vehicle;Trusted_Connection=True;";
+        private string connectionString = @"Server=(localdb)\MSSQLLOCALDB;Database=Vehicle;Trusted_Connection=True;";
         
         [HttpGet]
         public string Get()
         {
-            //Response.Headers.Add("Access-Control-Allow-Origin", "*");
             List<Vehicle> vehicles = new List<Vehicle>();
            
             using (SqlConnection connection = new SqlConnection(connectionString))
@@ -80,13 +79,13 @@ namespace SampleProj.Controllers
             using (SqlConnection connection = new SqlConnection(connectionString))
             {
                 connection.Open();
-                SqlCommand command = new SqlCommand("UPDATE VehicleDetails SET IsActive=false WHERE Id=@id", connection);
+                SqlCommand command = new SqlCommand("UPDATE VehicleDetails SET IsActive=0 WHERE Id=@id", connection);
                 command.Parameters.AddWithValue("@id", id);
                 int rowsAffected = command.ExecuteNonQuery();
 
                 if (rowsAffected > 0)
                 {
-                    return Ok($"Vehicle with ID {id} updated successfully.");
+                    return Ok($"Vehicle with ID {id} deleted successfully.");
                 }
                 else
                 {
